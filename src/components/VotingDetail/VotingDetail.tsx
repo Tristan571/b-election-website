@@ -4,7 +4,7 @@ import { IVoting } from "../../modules/Voting.module";
 import Voting from "../../artifacts/contracts/VotingManager.sol/Voting.json";
 import { ethers } from "ethers";
 import { ICandidate } from "../../modules/Candidate.module";
-import { IntegerType } from "mongodb/src";
+
 import { useMetaMask } from "../../hooks/useMetaMask";
 import { Navigation } from "../Navigation";
 import { ErrorPage } from "../ErrorPage";
@@ -311,7 +311,7 @@ export const VotingDetail: React.FC = () => {
     }
   }
 
-  const voteForCandidate = async (candidateId: IntegerType) => {
+  const voteForCandidate = async (candidateId: number) => {
     setIsLoading(true);
     console.log("Current candidate id: ", candidateId);
     const votingAddress = address;
