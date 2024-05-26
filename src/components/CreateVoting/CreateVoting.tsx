@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./index.module.css";
+
 import VotingManager from "../../artifacts/contracts/VotingManager.sol/VotingManager.json";
 import { ethers } from "ethers";
 import VotingManagerAddress from "../../../constants/VotingManagerAddress.json";
@@ -14,7 +14,7 @@ import { Navigation } from "../Navigation/Navigation";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Footer } from "../Footer";
-import { formatAddress, formatChainAsNum } from "../../utils";
+import { formatAddress } from "../../utils";
 import { Link } from "react-router-dom";
 
 
@@ -35,7 +35,7 @@ export const CreateVoting: React.FC = () => {
   var [votings, setVotings] = useState<IVoting[]>([]);
   const [votingName, setVotingName] = useState<string>("");
   var [votingAddress, setVotingAddress] = useState<string>("");
-  const [chainId, setChainId] = useState<string>("");
+
   var [startDateTime, setStartDateTime] = useState<string>("");
   var [endDateTime, setEndDateTime] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
@@ -92,6 +92,7 @@ export const CreateVoting: React.FC = () => {
       const resData = await res.json();
       console.log(resData);
       votingImg = resData["IpfsHash"];
+      setVotingImg(resData["IpfsHash"]);
       console.log("candidate img:", votingImg);
     } catch (error) {
       console.log(error);
@@ -105,14 +106,12 @@ export const CreateVoting: React.FC = () => {
     console.log("Selected time range:", value[0].$d);
   };
 
-  const SetCurrentChainId = () => {
-    setChainId(VotingManagerAddress["chainId"]);
-  };
+  
 
   useEffect(() => {
     console.log("api", API_URL)
     fetchData();
-    SetCurrentChainId();
+    
   }, []);
 
   //   const now = new Date().getTime();

@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, MouseEvent } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 import { useMetaMask } from "../../hooks/useMetaMask";
 import { Bounce, ToastContainer, toast } from "react-toastify";
@@ -26,10 +26,9 @@ export const Register: React.FC = () => {
   var [isVerified, setIsVerified] = useState(true);
 
   var { wallet } = useMetaMask();
-  const [phone, setPhone] = useState<string>("");
-  const [code, setCode] = useState<string>("");
+  
   const [message, setMessage] = useState<Message | null>(null);
-  const [otpSent, setOtpSent] = useState<boolean>(false);
+ 
   const [errors, setErrors] = useState({
     dob: "",
     nationalId: "",
@@ -41,7 +40,7 @@ export const Register: React.FC = () => {
     e.preventDefault();
     try {
       await axios.post(`${API_URL}/send-code, { phone }`);
-      setOtpSent(true);
+      
       setMessage({ text: "Code sent successfully", type: "success" });
     } catch (error) {
       setMessage({ text: "Error sending code", type: "error" });

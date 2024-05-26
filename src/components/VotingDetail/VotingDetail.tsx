@@ -29,15 +29,15 @@ export const VotingDetail: React.FC = () => {
   const [voting, setVoting] = useState<IVoting | null>(null);
   const [error, setError] = useState<string | null>(null);
   var [candidateList, setCandidateList] = useState<ICandidate[]>([]);
-  const [candidateName, setCandidateName] = useState<string>(""); //have to initailize the variable first
+  // const [candidateName, setCandidateName] = useState<string>(""); //have to initailize the variable first
   var [candidateImg, setCandidateImg] = useState<string>("");
 
-  const [winner, setWinner] = useState<ICandidate | null>(null);
+
   const [winners, setWinners] = useState<ICandidate[]>([]);
 
   var [searchedCandidate, setSearchedCandidate] =
     useState<SearchCandidate | null>(null);
-  const [searchError, setSearchError] = useState("");
+
 
   const [timeRemaining, setTimeRemaining] = useState("");
   const [countdownExpired, setCountdownExpired] = useState(false);
@@ -106,7 +106,7 @@ export const VotingDetail: React.FC = () => {
           `${API_URL}/api/users/votings/users-address/${searchAddress}`
         );
         if (!response.ok) {
-          setSearchError("Candidate not found");
+
           toast.error("Not found! ", {
             position: "top-right",
             autoClose: 3000,
@@ -124,10 +124,10 @@ export const VotingDetail: React.FC = () => {
         }
         const data = await response.json();
         setSearchedCandidate(data);
-        setSearchError(""); // Reset searchError state in case it was previously set
+
       } catch (error) {
         console.error("Error searching candidate:", error);
-        setSearchError("Error searching candidate. Please try again later."); // Set custom error message
+
         setSearchedCandidate(null); // Clear the previous candidate data
       }
     }
@@ -191,9 +191,7 @@ export const VotingDetail: React.FC = () => {
     return () => clearInterval(interval);
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserAddress(event.target.value);
-  };
+
 
   const getVotingAddress = async () => {
     try {
@@ -414,6 +412,7 @@ export const VotingDetail: React.FC = () => {
       const resData = await res.json();
       console.log(resData);
       candidateImg = resData["IpfsHash"];
+      setCandidateImg(resData["IpfsHash"]);
       console.log("candidate img:", candidateImg);
       addOneCandidate();
     } catch (error) {
@@ -465,44 +464,7 @@ export const VotingDetail: React.FC = () => {
       //   console.log("After end status", votingStatus);
     }
   };
-  const getWinningCandidate1 = async () => {
-    if (countdownExpired) {
-      const votingAddress = address;
-      console.log("Voting address", votingAddress);
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
 
-      if (!votingAddress) {
-        throw new Error("Address is undefined");
-      }
-
-      try {
-        const contract = new ethers.Contract(votingAddress, Voting.abi, signer);
-
-        const winningCandidate = await contract.getWinningCandidate();
-        setWinner(winningCandidate);
-      } catch (e: any) {}
-    }
-
-    // const votingAddress = address;
-
-    //   const provider = new ethers.BrowserProvider(window.ethereum);
-    //   const signer = await provider.getSigner();
-
-    //   if (!votingAddress) {
-    //     throw new Error("Address is undefined");
-    //   }
-
-    //   try {
-    //     const contract = new ethers.Contract(votingAddress, Voting.abi, signer);
-
-    //     const winningCandidate = await contract.getWinningCandidate();
-    //     console.log("Winner: ", winningCandidate)
-    //     setWinner(winningCandidate)
-    //   } catch (e: any) {
-    //     console.log("Winner error: ", e)
-    //   }
-  };
 
   const getWinningCandidate = async () => {
     if(countdownExpired){

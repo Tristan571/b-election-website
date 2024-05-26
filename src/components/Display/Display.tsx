@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-import { Card } from "antd";
+
 import { IVoting } from "../../modules/Voting.module";
 import { useMetaMask } from "../../hooks/useMetaMask";
 
