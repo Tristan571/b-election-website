@@ -1,0 +1,13 @@
+.metaMaskError {
+  /* calculated height: 68 px */
+  /* border: 1px solid rgb(0, 195, 255); */
+  height: 28px;
+  padding: 12px;
+  color: #EFEFEF;
+  background-color: transparent;
+}
+
+.error{
+  display: flex;
+  justify-content: center;
+}

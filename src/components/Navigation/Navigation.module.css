@@ -1,0 +1,41 @@
+/* .navigation {
+
+  margin-top: 1px;
+  border: 1px solid rgb(87, 160, 250);
+  height: 36px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  color: #FFF;
+}
+
+.flexContainer {
+  display: flex;
+  align-self: flex-end;
+  flex-direction: row;
+  min-width: calc(100vw -2em);
+  gap: 0em;
+  row-gap: 0em;
+}
+
+.flexItem {
+  width: 50%;
+}
+
+.leftNav {
+  display: block;
+  display: inline-block;
+  line-height: 36px;
+  height: 36px;
+  background: linear-gradient(to right, #2b2ef9, rgb(87, 160, 250));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rightNav {
+  color: #ddd;
+  margin-left: auto;
+  line-height: 36px;
+  height: 36px;
+  width: auto;
+} */
