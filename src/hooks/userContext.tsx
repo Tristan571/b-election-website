@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { useMetaMask } from './useMetaMask';
 import { IUser } from "../modules/User.module";
-import { ConsoleLogger } from 'hardhat/internal/hardhat-network/stack-traces/consoleLogger';
+
 
 interface UserContextType {
   userRegistered: boolean;
@@ -15,8 +15,8 @@ const UserContext = createContext<UserContextType>({
 const API_URL=import.meta.env.VITE_API_URL;
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   var [userRegistered, setUserRegistered] = useState(false);
-  var { wallet, isConnecting } = useMetaMask();
-  var [user, setUser] = useState<IUser | null>(null);
+  var { wallet } = useMetaMask();
+  
 
   async function getData(): Promise<IUser> {
     // try {
@@ -84,11 +84,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
         var data = await getData();
         if (data && data.isVerified) {
-          setUser(data);
+          
           userRegistered = true;
           setUserRegistered(true);
         } else {
-          setUser(null); // Reset user state if not verified
+          
           setUserRegistered(false);
         }
       } catch (error) {

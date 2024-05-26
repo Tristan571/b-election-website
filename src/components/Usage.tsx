@@ -1,4 +1,4 @@
-import React from "react";
+
  // Adjust the path to where your image is located
 
 export default function Usage() {
